@@ -1,6 +1,10 @@
-# Project Title (For Node.js screen scraper example scroll down)
-
+# Project Title
 A Simple NodeJS project with selenium and headless chrome built on serverless framework
+
+## Note:
+This project has two lambda functions in the "****helper.js****" file which is the entry point for the project: 
+* "petlist" # fetches a pet-adoption site, scrapes pet listings, stores it in DynamoDB
+* "seleniumtest" # shows an example of how to use selenium with headless chrome on AWS Lambda
 
 ### Pre-Requisites
  * npm
@@ -53,5 +57,11 @@ Example:
 $ lambda-local -l selenium_example.js -h run -e ./event_samples/sampleevent.json
 ```
 
-#### For additional configurations to AWS like Region, Service Name, timeout, memory, iam Roles, Buckets and Resources refer the `serverless.yml` template
+#### To test a function locally
+#### Here `**petlist**` is our function name from the `**helper.js**` file
+```$ serverless invoke local --function petlist```
+
+
+### For additional configurations to AWS like Region, Service Name, timeout, memory, iam Roles, Buckets and Resources refer the `serverless.yml` template
+
 

@@ -2,7 +2,6 @@ const cheerio = require('cheerio');
 const moment = require('moment');
 
 function petsFromHTML (html) {
-    // console.log(html);
     const $ = cheerio.load(html);
     const allPets = $('ul.large_bullet > li');
 
@@ -19,14 +18,7 @@ function petsFromHTML (html) {
 
     return petsList;
 }
-//
-// function formatJobs (list) {
-//     return list.reduce((acc, job) => {
-//         return `${acc}${job.job} in ${job.location} closing on ${moment(job.closing).format('LL')}\n\n`;
-//     }, 'We found:\n\n');
-// }
 
 module.exports = {
     petsFromHTML
-    // formatJobs
 };

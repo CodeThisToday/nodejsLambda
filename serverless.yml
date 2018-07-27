@@ -71,8 +71,10 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
-    handler: handler.hello
+  petlist:
+    handler: handler.petlist
+  seleniumtest:
+    handler: handler.seleniumtest
 #    name: login-test-inst
 #    description: sample selenium test to login to canvas test instructure site
 #    events:
