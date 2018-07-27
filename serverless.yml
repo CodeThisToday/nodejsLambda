@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: serverless # NOTE: update this with your service name
+service: helloPet # NOTE: update this with your service name
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -20,9 +20,9 @@ service: serverless # NOTE: update this with your service name
 provider:
   name: aws
   runtime: nodejs6.10
-  memorySize: 3008
-  timeout: 300
-  versionFunctions: false
+#  memorySize: 3008
+#  timeout: 30000
+#  versionFunctions: false
 
 # you can overwrite defaults here
 #  stage: dev
@@ -48,8 +48,8 @@ provider:
 #  environment:
 #    variable1: value1
 
-plugins:
-  - serverless-offline
+#plugins:
+#  - serverless-offline
 #custom:
 #  custom:
 #    webpackIncludeModules:
@@ -59,26 +59,26 @@ plugins:
 #          presets: ["es2015"]
 
 # you can add packaging information here
-package:
+#package:
 #  individually: true
-  include:
-    - index.js
-    - node_modules/**
-    - lib/**
-    - package.json
+#  include:
+#    - index.js
+#    - node_modules/**
+#    - lib/**
+#    - package.json
 #  exclude:
 #    - exclude-me.js
 #    - exclude-me-dir/**
 
 functions:
   hello:
-    handler: index.run
-    name: login-test-inst
-    description: sample selenium test to login to canvas test instructure site
-    events:
-      - http:
-          path: /
-          method: get
+    handler: handler.hello
+#    name: login-test-inst
+#    description: sample selenium test to login to canvas test instructure site
+#    events:
+#      - http:
+#          path: /
+#          method: get
 #  hello:
 #    handler: handler.hello
 #    events:
@@ -119,13 +119,47 @@ functions:
 #      variable2: value2
 
 # you can add CloudFormation resource templates here
-#resources:
-#  Resources:
-#    NewResource:
-#      Type: AWS::S3::Bucket
-#      Properties:
-#        BucketName: my-new-bucket
+resources:
+  Resources:
+    petlist:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: petlist
+        AttributeDefinitions:
+          - AttributeName: petId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: petId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+          
 #  Outputs:
 #     NewOutput:
 #       Description: "Description for the output"
 #       Value: "Some output value"
+
+ # A policy is a resource that states one or more permssions. It lists actions, resources and effects.
+
+DynamoDBIamPolicy:
+  Type: AWS::IAM::Policy
+  DependsOn: petlist
+  Properties:
+    PolicyName: lambda-dynamodb
+    PolicyDocument:
+      Version: '2012-10-17'
+      Statement:
+        - Effect: Allow
+          Action:
+            - dynamodb:DescribeTable
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource: arn:aws:dynamodb:*:*:table/petlist
+    Roles:
+      - Ref: IamRoleLambdaExecution
+

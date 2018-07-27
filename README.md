@@ -1,4 +1,4 @@
-# Project Title
+# Project Title (For Node.js screen scraper example scroll down)
 
 A Simple NodeJS project with selenium and headless chrome built on serverless framework
 
@@ -50,7 +50,7 @@ you can select and test a lambda directly on there too.
 #### To test the lambda function locally. Here "sampleevent.json" is a a sample event input to the "run" lambda function
 Example: 
 ```
-$ lambda-local -l index.js -h run -e ./event_samples/sampleevent.json
+$ lambda-local -l selenium_example.js -h run -e ./event_samples/sampleevent.json
 ```
 
 #### For additional configurations to AWS like Region, Service Name, timeout, memory, iam Roles, Buckets and Resources refer the `serverless.yml` template
