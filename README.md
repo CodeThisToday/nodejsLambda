@@ -9,13 +9,16 @@ This project has two lambda functions in the "****helper.js****" file which is t
 ### Pre-Requisites
  * npm
  * node.js 6.10
-####### plugin to test lambda functions locally (https://www.npmjs.com/package/lambda-local)
+
+Plugin to test lambda functions locally (https://www.npmjs.com/package/lambda-local)
  * $ npm install -g lambda-local
-####### the following are included in the ./lib/* folder
+
+The following are included in the **./lib/*** folder
  * headless chrome=60.0.3095.0  # this is also included in the ./lib/* folder in the project
  * chromedriver=2.32.498513    # selenium-webdriver is currently picky about which version of headless chrome it can work with 
-####### an AWS KEY and S3 Bucket
- export or save the AWS KEY and Secret KEY as environment variables (example: in bash_profile)
+
+An AWS KEY
+Export or save the AWS KEY and Secret KEY as environment variables (example: in bash_profile)
  * https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html
  
 #### Once you clone/download the project. Unzip the chrome binaries and node_modules by running the script below
@@ -47,8 +50,10 @@ $ modclean
 ```
 $ serverless deploy
 ```
-once deployed your lambda functions will show up in the AWS lambdas dashboard
-you can select and test a lambda directly on there too.
+Once deployed your lambda functions will show up in the AWS lambdas dashboard.
+You can select and unit test a lambda function directly from the AWS dashboard too.
+You can view the DynamoDB table in your AWS DynamoDB dashboard.
+You can view the Cloudformation stack, resources and corresponding logs.
 
 
 #### To test the lambda function locally. Here "sampleevent.json" is a a sample event input to the "run" lambda function
